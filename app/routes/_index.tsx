@@ -1,4 +1,12 @@
 import type { MetaFunction } from "@remix-run/node";
+import { useState } from "react";
+import DragDropFile from "../components/DragDrop";
+import VideoPlayer from "../components/VideoPlayer";
+import VideoMetadata from "~/components/VideoMetadata";
+
+import type { VideoMetadataProps } from "~/types";
+
+import styles from "../styles/index.module.css";
 
 export const meta: MetaFunction = () => {
   return [
@@ -8,34 +16,41 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
+  const [videoFile, setVideoFile] = useState<any>(null);
+  const [fileURL, setFileURL] = useState("");
+  const [metadata, setMetadata] = useState<VideoMetadataProps>({
+    name: "",
+    size: 0,
+    type: "",
+    lastModified: 0,
+  });
+  const [display, setDisplay] = useState(false);
+
+  const uploadVideo = (file: any) => {
+    setVideoFile(file);
+    setFileURL(URL.createObjectURL(file));
+    const { name, lastModified, size, type } = file;
+    setMetadata({
+      name,
+      lastModified,
+      size,
+      type,
+    });
+  };
+
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+    <div className={styles.container}>
+      <DragDropFile setFile={uploadVideo} />
+      {videoFile && (
+        <div className={styles.videoContainer}>
+          <VideoPlayer
+            fileURL={fileURL}
+            setFile={setVideoFile}
+            setDisplay={setDisplay}
+          />
+          {display && <VideoMetadata {...metadata} />}
+        </div>
+      )}
     </div>
   );
 }
