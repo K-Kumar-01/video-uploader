@@ -1,0 +1,13 @@
+.container table,
+th,
+td {
+  border: 1px solid black;
+}
+
+.container th {
+  font-size: 125%;
+}
+
+.propertyItem {
+  font-weight: bold;
+}
