@@ -1,0 +1,8 @@
+.player {
+  width: 60vw;
+  display: none;
+}
+
+.showPlayer {
+  display: block;
+}
