@@ -2,15 +2,13 @@ import { useRef, useState } from "react";
 import styles from "./index.module.css";
 
 type DragDropFileProps = {
-  setFile: any
+  setFile: any;
 };
 
 const DragDropFile = ({ setFile }: DragDropFileProps) => {
   const [dragActive, setDragActive] = useState(false);
-  // ref
   const inputRef = useRef<any>(null);
 
-  // handle drag events
   const handleDrag = (e: any) => {
     e.preventDefault();
     e.stopPropagation();
@@ -21,22 +19,21 @@ const DragDropFile = ({ setFile }: DragDropFileProps) => {
     }
   };
 
-  // triggers when file is dropped
   const handleDrop = function (e: any) {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    if (e.dataTransfer!.files && e.dataTransfer!.files[0]) {
-      if (e.dataTransfer!.files[0].type === "video/mp4") {
-        console.log(e.dataTransfer.files[0], e.dataTransfer);
-        setFile(e.dataTransfer.files[0]);
-      } else {
-        alert("Only mp4 video formats are supported");
+    if (e.dataTransfer) {
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        if (e.dataTransfer!.files[0].type === "video/mp4") {
+          setFile(e.dataTransfer.files[0]);
+        } else {
+          alert("Only mp4 video formats are supported");
+        }
       }
     }
   };
 
-  // triggers when file is selected with click
   const handleChange = function (e: any) {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
@@ -44,7 +41,6 @@ const DragDropFile = ({ setFile }: DragDropFileProps) => {
     }
   };
 
-  // triggers the input when the button is clicked
   const onButtonClick = () => {
     if (inputRef.current) {
       inputRef.current.click();
