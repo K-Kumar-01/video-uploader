@@ -1,8 +1,10 @@
 import type { MetaFunction } from "@remix-run/node";
 import { useState } from "react";
+
 import DragDropFile from "../components/DragDrop";
 import VideoPlayer from "../components/VideoPlayer";
 import VideoMetadata from "~/components/VideoMetadata";
+import Waveform from "~/components/Waveform";
 
 import type { VideoMetadataProps } from "~/types";
 
@@ -51,6 +53,7 @@ export default function Index() {
           {display && <VideoMetadata {...metadata} />}
         </div>
       )}
+      {videoFile && display && <Waveform />}
     </div>
   );
 }
