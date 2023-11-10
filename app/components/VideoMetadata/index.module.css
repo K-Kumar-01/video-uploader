@@ -11,3 +11,9 @@ td {
 .propertyItem {
   font-weight: bold;
 }
+
+@media screen and (max-width: 648px) {
+  .container table {
+    margin: 0 auto;
+  }
+}
