@@ -2,10 +2,9 @@
 I have worked with Next.js in many projects and have used Gatsby in one of the proejcts. I haven't used Remix so thought that it might be a good way to explore the basics of remix. In the codebase, I havent used many remix components due to lack of time but I was able to get a grasp of the very basic understanding of the remix.
 
 ## Improvements that can be made
-1. Proper type annotation
+1. Improved type annotation
 2. Using remix state and data flow management for managing different state
 3. Improved Error Hanlding via toasts
-4. Responsive Desgins
 5. Proper UI/UX and a guide on what the site is about
 6. Make the site a PWA
 
