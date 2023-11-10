@@ -12,8 +12,8 @@ import styles from "../styles/index.module.css";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Vidyo Assignment" },
+    { name: "Video Uploader", content: "Upload video and see audio waveform" },
   ];
 };
 
