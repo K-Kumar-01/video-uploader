@@ -1,13 +1,8 @@
 import { useEffect } from "react";
-import styles from "./index.module.css";
 
-type VideoPlayerProps = {
-  fileURL: string;
-  checking: number;
-  setChecking: (value: number) => void;
-  setFile: (value: any) => void;
-  setDisplay: (value: boolean) => void;
-};
+import type { VideoPlayerProps } from "~/types";
+
+import styles from "./index.module.css";
 
 const VideoPlayer = ({
   fileURL,
