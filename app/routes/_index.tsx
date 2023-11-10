@@ -27,8 +27,14 @@ export default function Index() {
     lastModified: 0,
   });
   const [display, setDisplay] = useState(false);
+  // 1 denotes checking
+  // 2 denotes audio present
+  // -1 denotes audio not present
+  const [checking, setChecking] = useState(1);
 
   const uploadVideo = (file: any) => {
+    setDisplay(false);
+    setChecking(1);
     setVideoFile(file);
     setFileURL(URL.createObjectURL(file));
     const { name, lastModified, size, type } = file;
@@ -47,6 +53,8 @@ export default function Index() {
         <div className={styles.videoContainer}>
           <VideoPlayer
             fileURL={fileURL}
+            checking={checking}
+            setChecking={setChecking}
             setFile={setVideoFile}
             setDisplay={setDisplay}
           />

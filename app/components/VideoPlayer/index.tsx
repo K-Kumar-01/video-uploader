@@ -1,18 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styles from "./index.module.css";
 
 type VideoPlayerProps = {
   fileURL: string;
+  checking: number;
+  setChecking: (value: number) => void;
   setFile: (value: any) => void;
   setDisplay: (value: boolean) => void;
 };
 
-const VideoPlayer = ({ fileURL, setFile, setDisplay }: VideoPlayerProps) => {
-  // 1 denotes checking
-  // 2 denotes audio present
-  // -1 denotes audio not present
-  const [checking, setChecking] = useState(1);
-
+const VideoPlayer = ({
+  fileURL,
+  checking,
+  setChecking,
+  setFile,
+  setDisplay,
+}: VideoPlayerProps) => {
   const hasAudio = (video: any) =>
     video.mozHasAudio ||
     Boolean(video.webkitAudioDecodedByteCount) ||
@@ -20,10 +23,8 @@ const VideoPlayer = ({ fileURL, setFile, setDisplay }: VideoPlayerProps) => {
 
   useEffect(() => {
     const videoElement = document.getElementById("video") as HTMLVideoElement;
-
     if (videoElement) {
       const getData = async (event: any) => {
-        console.log(videoElement, hasAudio(videoElement));
         videoElement.play();
         await new Promise((r) => setTimeout(r, 100));
         videoElement.pause();
@@ -38,11 +39,10 @@ const VideoPlayer = ({ fileURL, setFile, setDisplay }: VideoPlayerProps) => {
           setDisplay(false);
         }
       };
-      //   videoElement.addEventListener("loadeddata", getData);
       videoElement.addEventListener("loadeddata", getData);
       return () => videoElement.removeEventListener("loadeddata", getData);
     }
-  }, []);
+  }, [setChecking, setDisplay, setFile]);
 
   return (
     <div className={styles.container}>
